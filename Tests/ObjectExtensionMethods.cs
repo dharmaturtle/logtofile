@@ -1,8 +1,20 @@
+using Serilog;
 using System;
 using System.Text.RegularExpressions;
 
 namespace Sandbox {
   public static class ObjectExtensionMethods {
+
+    public static TInput L<TInput>(this TInput input, string id = "") {
+#if DEBUG
+      if (string.IsNullOrWhiteSpace(id)) {
+        Log.Information(MyObjectDumper.Dump(input));
+      } else {
+        Log.Information(id + ": " + MyObjectDumper.Dump(input));
+      }
+#endif
+      return input;
+    }
 
     public static TInput D<TInput>(this TInput input, string id = "") {
 #if DEBUG
