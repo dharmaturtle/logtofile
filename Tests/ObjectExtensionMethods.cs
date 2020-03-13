@@ -8,9 +8,9 @@ namespace Sandbox {
     public static TInput L<TInput>(this TInput input, string id = "") {
 #if DEBUG
       if (string.IsNullOrWhiteSpace(id)) {
-        Log.Information(MyObjectDumper.Dump(input));
+        Log.Information(ObjectDumper.Dump(input));
       } else {
-        Log.Information(id + ": " + MyObjectDumper.Dump(input));
+        Log.Information(id + ": " + ObjectDumper.Dump(input));
       }
 #endif
       return input;
@@ -19,9 +19,9 @@ namespace Sandbox {
     public static TInput D<TInput>(this TInput input, string id = "") {
 #if DEBUG
       if (string.IsNullOrWhiteSpace(id)) {
-        Console.WriteLine(MyObjectDumper.Dump(input));
+        Log.Information(ObjectDumper.Dump(input));
       } else {
-        Console.WriteLine(id + ": " + MyObjectDumper.Dump(input));
+        Log.Information(id + ": " + ObjectDumper.Dump(input));
       }
 #endif
       return input;
@@ -39,7 +39,7 @@ namespace Sandbox {
     };
 
     public static TInput CDump<TInput>(this TInput input) {
-      Console.WriteLine(ObjectDumper.Dump(input, DumpOptions));
+      Log.Information(ObjectDumper.Dump(input, DumpOptions));
       return input;
     }
 
@@ -59,7 +59,7 @@ namespace Sandbox {
         var i = s.LastIndexOf('}');
         s = s.Remove(i).Insert(i, "    ]");
       }
-      Console.WriteLine(s);
+      Log.Information(s);
       return input;
     }
 
