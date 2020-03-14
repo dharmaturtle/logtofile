@@ -20,8 +20,8 @@ namespace Tests {
     }
 
     [Theory]
-    [InlineData(new object[] { new string[] { "a", "b" }, 1337 })]
-    public void T3(string[] inputs, int i) {
+    [InlineData(new object[] { new int[] { 1, 2 }, "" })]
+    public void T3(int[] inputs, string i) {
       foreach (var input in inputs) {
         input.D();
       }
