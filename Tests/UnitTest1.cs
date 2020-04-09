@@ -1,14 +1,54 @@
 using Sandbox;
 using System;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using Xunit;
 
 namespace Tests {
+
+  public class Solution {
+    public static void DoThing(string inputData) {
+      string line;
+      //while ((line = Console.ReadLine()) != null) {
+      //  inputData += line + "\n";
+      //}
+      // Do not edit: Output solution to console
+      Console.WriteLine(codeHere(inputData));
+    }
+
+    static String codeHere(String inputData) {
+      var lines = inputData.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+      var nums = lines[1].Split(' ').Select(int.Parse).ToList();
+      var countByX = new Dictionary<int, int>();
+      foreach (var x in nums) {
+        if (countByX.ContainsKey(x)) {
+          countByX[x]++;
+        } else {
+          countByX.Add(x, 1);
+        }
+      }
+      var max = countByX.Max(x => x.Value);
+      var maxOptions = countByX.Where(kvp => kvp.Value == max);
+      var min = maxOptions.Select(maxOption => {
+        var key = maxOption.Key;
+        var first = nums.IndexOf(key);
+        var last = nums.LastIndexOf(key);
+        return last - first + 1;
+      }).Min();
+
+      // Use this function to return your solution.
+      return min.ToString();
+    }
+  }
+
   public class UnitTest1 {
     [Fact]
     public void T1() {
-      "Hello world".D();
+      //"Hello world".D();
+      Solution.DoThing(@"5
+1 2 2 3 1");
     }
 
     [Theory]
